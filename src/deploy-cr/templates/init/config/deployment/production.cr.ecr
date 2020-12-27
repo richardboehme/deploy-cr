@@ -1,0 +1,8 @@
+require "./task"
+
+Deployment::Task.run(
+  host: "remote-host",
+  user: "deploy",
+  path: "path/to/your/app",
+  app_name: "your-binary-name"
+)

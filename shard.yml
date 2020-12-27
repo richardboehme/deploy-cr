@@ -1,0 +1,30 @@
+name: deploy-cr
+version: 0.1.0
+
+authors:
+  - Richard Böhme <richard.boehme1999@gmail.com>
+
+crystal: 0.35.1
+
+license: MIT
+
+targets:
+  deploy: 
+    main: src/deploy-cr/cli.cr
+
+scripts:
+  postinstall: shards build deploy
+
+executables:
+  - deploy
+
+dependencies:
+  hathor-operation:
+    github: ikaru5/hathor-operation
+    version: ~> 0.2.0
+  teeplate:
+    github: mosop/teeplate
+
+development_dependencies:
+  deploy-cr:
+    path: .
