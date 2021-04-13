@@ -33,7 +33,7 @@ class DeployCR::Deployment < Hathor::Operation
       if source == "local"
         run_process("cp", ["-R", app_path.to_s, tmppath], chdir: app_path)
       else
-        run_process("rm", ["-rf", tmppath + "/"], chdir: app_path) && run_process("git", ["clone", source, tmppath], chdir: app_path)
+        run_process("rm", ["-rf", tmppath + "/"], chdir: app_path) && run_process("git", ["clone", "--recurse-submodules", source, tmppath], chdir: app_path)
       end
     end
   end
