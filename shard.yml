@@ -13,7 +13,9 @@ targets:
     main: src/deploy-cr/cli.cr
 
 scripts:
-  postinstall: shards build deploy
+  # FIXME: Is this even the proper way to build the binary?
+  # We need to use --production here to avoid installing the development dependencies
+  postinstall: shards build --production deploy 
 
 executables:
   - deploy
