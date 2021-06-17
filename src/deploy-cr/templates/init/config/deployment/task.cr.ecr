@@ -3,7 +3,7 @@ require "deploy-cr/deployment"
 class Deployment::Task < DeployCR::Deployment
 
   step clone_repository!
-  <%- unless skip_npm? -%>
+  <%- if npm? -%>
   step compile_assets!
   <%- end -%>
   step compile_shards!

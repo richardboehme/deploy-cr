@@ -4,7 +4,7 @@ version: 0.1.0
 authors:
   - Richard Böhme <richard.boehme1999@gmail.com>
 
-crystal: 0.35.1
+crystal: 0.36.1
 
 license: MIT
 
@@ -26,6 +26,8 @@ dependencies:
     version: ~> 0.2.0
   teeplate:
     github: mosop/teeplate
+  clip:
+    github: erdnaxeli/clip
 
 development_dependencies:
   deploy-cr:

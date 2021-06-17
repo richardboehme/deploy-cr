@@ -1,51 +1,34 @@
 require "teeplate"
 require "../deployment"
 
-class DeployCR::CLI::InitCommand
+module DeployCR::CLI
+  @[Clip::Doc("Initialize your project with deployment settings")]
+  struct InitCommand < DeployCommand
+    include Clip::Mapper
 
-  AVAILABLE_OPTIONS = [
-    "--skip-npm",
-    "--cross-compile"
-  ]
+    @[Clip::Doc("Enable/Disable asset compilation via npm")]
+    property? npm = true
 
-  def self.run
-    case ARGV.first?
-    when "help"
-      print_help
-    else
-      unknown_options = ARGV - AVAILABLE_OPTIONS
-      if unknown_options.any?
-        puts "Unknown options detected: #{unknown_options.join(", ")}\nTry ./bin/#{BINNAME} init help"
-        return
+    @[Clip::Doc("Cross-compile your binary for deployment")]
+    @[Clip::Option("--cross-compile")]
+    property? cross_compile = false
+
+    def run
+      if !cross_compile?
+        raise TODO.new
       end
 
-      Template.new(ARGV).render(".", list: true, color: true, interactive: true)
+      Template.new(self).render(".", list: true, color: true, interactive: true)
     end
-  end
 
-  def self.print_help
-    puts(
-      <<-EOS
-      The init command creates default configuration files needed to deploy your application.
-      You can configure the default config with the following options.
+    class Template < Teeplate::FileTree
+      directory "#{__DIR__}/../templates/init"
 
-      Options:
-          --skip-npm            Skip compiling npm assets
-          --cross-compile       Cross-compile your binary for deployment
-      EOS
-    )
-  end
+      property command : InitCommand
+      forward_missing_to(command)
 
-  class Template < Teeplate::FileTree
-    directory "#{__DIR__}/../templates/init"
-
-    property options : Array(String)
-
-    def initialize(@options); end
-
-    def skip_npm?
-      return options.includes?("--skip-npm")
+      def initialize(@command); end
     end
-  end
 
+  end
 end

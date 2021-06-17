@@ -1,41 +1,32 @@
-require "./init_command"
-require "./run_command"
+require "clip"
 
-class DeployCR::CLI::DeployCommand
-
-  def self.run
-    if ARGV.empty?
-      print_help
-      return
-    end
-
-    case ARGV.shift
-    when "init"
-      DeployCR::CLI::InitCommand.run
-    when "run"
-      DeployCR::CLI::RunCommand.run
-    when "check"
-      # CheckCommand.run
-    else
-      print_help 
-    end
-  end
-
-  def self.print_help
-    puts <<-EOS
-    DeployCR is a tool to deploy amber applications to production
+module DeployCR::CLI 
+  @[Clip::Doc("DeployCR is a tool to deploy crystal applications to a server.")]
+  abstract struct DeployCommand
+    include Clip::Mapper
     
-    Usage:
-        ./bin/#{BINNAME} <subcommand> [subcommand options]
+    Clip.add_commands({
+      "init" => InitCommand,
+      "run" => RunCommand
+    })
 
-        You can find information about subcommand options by running
-          ./bin/#{BINNAME} <subcommand> help
+    def self.run
+      begin 
+        command = self.parse
+      rescue ex : Clip::Error
+        puts ex
+        exit
+      end
 
-    Commands:
-        init              Initialize your project with deployment settings
-        run [stage]       Deploys your application to the supplied stage
-        check             Checks the remote server connection
-    EOS
+      case command
+      when Clip::Mapper::Help
+        puts command.help
+      else 
+        command.run
+      end   
+    end
+
+    abstract def run
+    
   end
-
 end
