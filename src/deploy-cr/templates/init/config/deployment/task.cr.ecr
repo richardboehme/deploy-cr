@@ -1,16 +1,15 @@
 require "deploy-cr/deployment"
 
 class Deployment::Task < DeployCR::Deployment
+  include DeployCR::Task::CloneProject::Properties
 
-  step clone_repository!
+  step DeployCR::Task::CloneProject
   <%- if npm? -%>
-  step compile_assets!
+  step DeployCR::Task::CompileAssets
   <%- end -%>
-  step compile_shards!
   step retrieve_llvm_target!
   step compile_app!
   step sync_to_server!
   step link_binary!
   step restart!
-
 end

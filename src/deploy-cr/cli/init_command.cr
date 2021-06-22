@@ -29,6 +29,5 @@ module DeployCR::CLI
 
       def initialize(@command); end
     end
-
   end
 end

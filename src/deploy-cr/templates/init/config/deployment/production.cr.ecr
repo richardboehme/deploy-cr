@@ -1,8 +1,11 @@
 require "./task"
 
-Deployment::Task.run(
-  host: "remote-host",
-  user: "deploy",
-  path: "path/to/your/app",
-  app_name: "your-binary-name"
-)
+Deployment::Task.configure do |config|
+  config.app_name = "your-binary-name"
+  config.path = "path/to/your/app"
+
+  config.host = "remote-host"
+  config.user = "deploy"
+
+  config.source = "git-repo-path"
+end
