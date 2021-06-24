@@ -23,8 +23,7 @@ executables:
 dependencies:
   hathor-operation:
     github: ikaru5/hathor-operation
-    # version: ~> 0.2.0
-    branch: 20210108_richardboehme_add-nested-macro
+    version: ~> 0.3.0
   teeplate:
     github: mosop/teeplate
   clip:
