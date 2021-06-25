@@ -2,10 +2,10 @@ require "../spec_helper"
 require "../../src/deploy-cr/deployment"
 require "../../src/deploy-cr/task/clone_project"
 
-class Task < DeployCR::Deployment
-  include DeployCR::Task::CloneProject::Properties
+private class Task < DeployCR::Deployment
+  include Task::CloneProject::Properties
 
-  step DeployCR::Task::CloneProject
+  step Task::CloneProject
 end
 
 describe DeployCR::Task::CloneProject do
@@ -15,7 +15,7 @@ describe DeployCR::Task::CloneProject do
         config.source = "git-repo"
       end
 
-    operation = operation.deploy_cr__task__clone_project
+    operation = operation.task__clone_project
     operation.success?.should be_true
 
     operation.commands.size.should eq(3)

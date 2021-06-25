@@ -1,15 +1,21 @@
 require "deploy-cr/deployment"
 
 class Deployment::Task < DeployCR::Deployment
-  include DeployCR::Task::CloneProject::Properties
+  include Task::CloneProject::Properties
+  <%- if cross_compile? -%>
+  include Task::CrossCompile::Properties
+  <%- end %>
 
-  step DeployCR::Task::CloneProject
+  step Task::CloneProject
   <%- if npm? -%>
-  step DeployCR::Task::CompileAssets
+  step Task::CompileAssets
   <%- end -%>
-  step retrieve_llvm_target!
-  step compile_app!
+  <%- if cross_compile? -%>
+  step Task::CrossCompile::Compile
+  <%- end %>
   step sync_to_server!
-  step link_binary!
+  <%- if cross_compile? -%>
+  step Task::CrossCompile::Link
+  <%- end %>
   step restart!
 end

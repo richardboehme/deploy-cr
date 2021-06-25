@@ -18,4 +18,12 @@ module DeployCR
   def tmp_path
     "tmp/deploy"
   end
+
+  def self.stdout
+    STDOUT
+  end
+
+  def self.stderr
+    STDOUT
+  end
 end

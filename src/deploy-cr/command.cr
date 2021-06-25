@@ -11,7 +11,7 @@ class DeployCR::Command
   def initialize(
     @cmd,
     @args = [] of String,
-    @output = STDOUT,
+    @output = DeployCR.stdout,
     @chdir = Path[File.join(app_path, tmp_path)],
     @shell = false
   )
@@ -23,7 +23,7 @@ class DeployCR::Command
         @cmd,
         @args,
         output: @output,
-        error: STDOUT,
+        error: DeployCR.stderr,
         chdir: @chdir.to_s,
         shell: @shell
       )
@@ -34,5 +34,17 @@ class DeployCR::Command
     @args = ["#{user}@#{host}", cmd, args].flatten
     @cmd = "ssh"
     self
+  end
+
+  def ssh?
+    @cmd == "ssh"
+  end
+
+  def command_with_arguments
+    if ssh?
+      args[1..-1].join(" ")
+    else
+      "#{cmd} #{args.join(" ")}"
+    end
   end
 end
