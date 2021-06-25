@@ -13,7 +13,7 @@ describe DeployCR::Task::CrossCompile::Compile do
     CommandStub.stub_command("llvm-command", ["target"])
     CommandStub.stub_command("shards", ["cc linking"])
 
-    operation =
+    base_operation =
       Task.configure do |config|
         config.user = "user"
         config.host = "host"
@@ -21,9 +21,8 @@ describe DeployCR::Task::CrossCompile::Compile do
         config.llvm_command = "llvm-command"
       end
 
-    operation = operation.task__cross_compile__compile
+    operation = base_operation.task__cross_compile__compile
     operation.success?.should be_true
-
 
     operation.commands.size.should eq(2)
 
@@ -36,5 +35,6 @@ describe DeployCR::Task::CrossCompile::Compile do
     cmd.output.class.should eq(IO::MultiWriter)
 
     operation.link_command.should eq("cc linking")
+    base_operation.files.includes?("bin/deploy-cr.o").should be_true
   end
 end

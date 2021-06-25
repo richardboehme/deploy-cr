@@ -5,8 +5,9 @@ module DeployCR::Task::CrossCompile
     include Properties
 
     property app_name : String
+    property files : Array(String)
 
-    def initialize(@user, @host, @app_name, @llvm_command); end
+    def initialize(@user, @host, @app_name, @files, @llvm_command); end
 
     step retrieve_llvm_target!
     step compile_app!
@@ -30,6 +31,7 @@ module DeployCR::Task::CrossCompile
         output.each_line do |line|
           if line.starts_with?("cc")
             self.link_command = line
+            self.files << "bin/#{app_name}.o"
             return true
           end
         end
