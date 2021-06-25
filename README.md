@@ -1,6 +1,11 @@
 # deploy-cr
 
-TODO: Write a description here
+## TODO List
+
+- [x] Create Amber default settings
+- [ ] Make File Uploading more elegant
+- [ ] Extend tests (CLI + Main Operation)
+- [ ] Document everything
 
 ## Installation
 
