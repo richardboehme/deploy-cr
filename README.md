@@ -6,6 +6,9 @@
 - [ ] Make File Uploading more elegant
 - [ ] Extend tests (CLI + Main Operation)
 - [ ] Document everything
+- [ ] Input validation at compile time
+- [ ] Implement some kind of more sophisticated logger (better than puts I guess)
+- [ ] Add CI
 
 ## Installation
 
