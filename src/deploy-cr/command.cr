@@ -44,7 +44,7 @@ class DeployCR::Command
     if ssh?
       args[1..-1].join(" ")
     else
-      "#{cmd} #{args.join(" ")}"
+      [cmd, args].flatten.join(" ")
     end
   end
 end
