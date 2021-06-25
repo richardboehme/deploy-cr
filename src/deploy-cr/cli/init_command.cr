@@ -13,6 +13,10 @@ module DeployCR::CLI
     @[Clip::Option("--cross-compile")]
     property? cross_compile = false
 
+    @[Clip::Doc("Apply default settings for deploying an Amber application")]
+    @[Clip::Option("--amber")]
+    property? amber = false
+
     def run
       if !cross_compile?
         raise TODO.new

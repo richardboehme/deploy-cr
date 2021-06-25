@@ -12,7 +12,10 @@ class Deployment::Task < DeployCR::Deployment
   <%- end -%>
   <%- if cross_compile? -%>
   step Task::CrossCompile::Compile
-  <%- end %>
+  <%- end -%>
+  <%- if amber? -%>
+  step Integration::Amber
+  <%- end -%>
   step sync_to_server!
   <%- if cross_compile? -%>
   step Task::CrossCompile::Link
