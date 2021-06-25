@@ -2,11 +2,16 @@ require "spec"
 require "../src/deploy-cr"
 require "hathor-operation"
 
+SPEC_STDOUT = IO::Memory.new
 
 module DeployCR
   def self.stdout
-    IO::Memory.new
+    SPEC_STDOUT
   end
+end
+
+Spec.after_each do
+  DeployCR.stdout.clear
 end
 
 class CommandStub

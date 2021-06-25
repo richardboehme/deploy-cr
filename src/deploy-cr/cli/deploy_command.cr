@@ -10,17 +10,17 @@ module DeployCR::CLI
       "run"  => RunCommand,
     })
 
-    def self.run
+    def self.run(arguments)
       begin
-        command = self.parse
+        command = self.parse(arguments)
       rescue ex : Clip::Error
-        puts ex
-        exit
+        DeployCR.stdout.puts ex
+        return
       end
 
       case command
       when Clip::Mapper::Help
-        puts command.help
+        DeployCR.stdout.puts command.help
       else
         command.run
       end
