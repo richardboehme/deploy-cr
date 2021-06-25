@@ -17,5 +17,4 @@ class Deployment::Task < DeployCR::Deployment
   <%- if cross_compile? -%>
   step Task::CrossCompile::Link
   <%- end %>
-  step restart!
 end
