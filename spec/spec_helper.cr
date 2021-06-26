@@ -10,8 +10,10 @@ module DeployCR
   end
 end
 
+
 Spec.after_each do
   DeployCR.stdout.clear
+  DeployCR::Command.commands.clear
 end
 
 class CommandStub
@@ -31,34 +33,15 @@ class DeployCR::Command
 
   def run
     @@commands << self
+    if self.output != STDOUT && CommandStub.stubs.has_key? self.real_command
+      CommandStub.stubs[self.real_command].each do |line|
+        self.output.puts(line)
+      end
+    end
     true
   end
 
   def self.commands
     @@commands
-  end
-end
-
-class DeployCR::Operation < Hathor::Operation
-  property commands = [] of DeployCR::Command
-
-  def run(*args, **options)
-    commands << build_command(*args, **options)
-    true
-  end
-
-  def ssh(*args, **options)
-    commands << build_command(*args, **options).via_ssh(user, host)
-    true
-  end
-
-  def build_command(*args, **options)
-    command = DeployCR::Command.new(*args, **options)
-    if command.output != STDOUT && CommandStub.stubs.has_key? command.cmd
-      CommandStub.stubs[command.cmd].each do |line|
-        command.output.puts(line)
-      end
-    end
-    command
   end
 end

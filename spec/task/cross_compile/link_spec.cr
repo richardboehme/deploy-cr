@@ -11,7 +11,7 @@ end
 
 describe DeployCR::Task::CrossCompile::Link do
   it "produce correct commands" do
-    operation = 
+    operation =
       Task.configure do |config|
         config.user = "user"
         config.host = "host"
@@ -24,9 +24,9 @@ describe DeployCR::Task::CrossCompile::Link do
     operation = operation.task__cross_compile__link
     operation.success?.should be_true
 
-    operation.commands.size.should eq(1)
+    DeployCR::Command.commands.size.should eq(1)
 
-    cmd = operation.commands[0]
+    cmd = DeployCR::Command.commands.first
     cmd.ssh?.should be_true
     cmd.command_with_arguments.should eq("cc /srv/app ~/crystal/src/ext/libcrystal.a foo")
   end

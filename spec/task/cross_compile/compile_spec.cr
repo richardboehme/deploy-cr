@@ -24,13 +24,13 @@ describe DeployCR::Task::CrossCompile::Compile do
     operation = base_operation.task__cross_compile__compile
     operation.success?.should be_true
 
-    operation.commands.size.should eq(2)
+    DeployCR::Command.commands.size.should eq(2)
 
-    cmd = operation.commands[0]
+    cmd = DeployCR::Command.commands[0]
     cmd.ssh?.should be_true
     cmd.command_with_arguments.should eq("llvm-command --host-target")
 
-    cmd = operation.commands[1]
+    cmd = DeployCR::Command.commands[1]
     cmd.command_with_arguments.should eq("shards build deploy-cr --release --production --target=target --cross-compile")
     cmd.output.class.should eq(IO::MultiWriter)
 

@@ -20,9 +20,9 @@ describe DeployCR::Deployment do
     operation.success?.should be_true
     operation.app_name.should eq("deploy-cr")
 
-    operation.commands.size.should eq(1)
+    DeployCR::Command.commands.size.should eq(1)
 
-    cmd = operation.commands.first
+    cmd = DeployCR::Command.commands.first
     cmd.shell?.should be_true
     cmd.command_with_arguments.should eq(
       "rsync -avmz -e ssh --include=\"*/\" --include=\"file1\" --include=\"file2\" --exclude=\"*\" . user@host:/srv/app"

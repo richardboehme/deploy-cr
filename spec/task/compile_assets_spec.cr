@@ -5,9 +5,9 @@ describe DeployCR::Task::CompileAssets do
   it "produce correct output" do
     operation = DeployCR::Task::CompileAssets.run
 
-    operation.commands.size.should eq(2)
+    DeployCR::Command.commands.size.should eq(2)
 
-    install_command, run_release_command = operation.commands
+    install_command, run_release_command = DeployCR::Command.commands
 
     install_command.cmd.should eq("npm")
     install_command.args.should eq(["install"])

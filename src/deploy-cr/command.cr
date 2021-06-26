@@ -40,11 +40,15 @@ class DeployCR::Command
     @cmd == "ssh"
   end
 
+  def real_command
+    ssh? ? args[1] : cmd
+  end
+
+  def real_arguments
+    ssh? ? args[2..-1] : args
+  end
+
   def command_with_arguments
-    if ssh?
-      args[1..-1].join(" ")
-    else
-      [cmd, args].flatten.join(" ")
-    end
+    [real_command, real_arguments].flatten.join(" ")
   end
 end
