@@ -26,6 +26,19 @@ class CommandStub
   end
 end
 
+class DeployCR::Command
+  @@commands = [] of DeployCR::Command
+
+  def run
+    @@commands << self
+    true
+  end
+
+  def self.commands
+    @@commands
+  end
+end
+
 class DeployCR::Operation < Hathor::Operation
   property commands = [] of DeployCR::Command
 
