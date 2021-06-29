@@ -6,8 +6,9 @@ module DeployCR::CLI
   struct InitCommand < DeployCommand
     include Clip::Mapper
 
-    @[Clip::Doc("Enable/Disable asset compilation via npm")]
-    property? npm = true
+    @[Clip::Doc("Enable asset compilation via npm")]
+    @[Clip::Option("--npm")]
+    property? npm = false
 
     @[Clip::Doc("Cross-compile your binary for deployment")]
     @[Clip::Option("--cross-compile")]
@@ -19,7 +20,7 @@ module DeployCR::CLI
 
     def run
       if !cross_compile?
-        raise TODO.new
+        raise TODO.new("normal compile mode")
       end
 
       Template.new(self).render(".", list: true, color: true, interactive: true)

@@ -4,7 +4,7 @@
 
 - [x] Create Amber default settings
 - [ ] Make File Uploading more elegant
-- [ ] Extend tests (CLI + Main Operation)
+- [x] Extend tests (CLI + Main Operation)
 - [ ] Document everything
 - [ ] Input validation at compile time
 - [ ] Implement some kind of more sophisticated logger (better than puts I guess)
