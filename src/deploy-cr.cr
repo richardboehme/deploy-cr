@@ -1,6 +1,6 @@
-require "deploy-cr/todo"
-require "deploy-cr/command"
-require "deploy-cr/operation"
+require "./deploy-cr/todo"
+require "./deploy-cr/command"
+require "./deploy-cr/operation"
 
 # TODO: Write documentation for `Deploy::Cr`
 module DeployCR

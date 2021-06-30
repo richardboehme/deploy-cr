@@ -1,0 +1,21 @@
+name: Crystal Specs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run_specs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: oprypin/install-crystal@v1
+      with:
+        crystal: 0.36.1
+    - name: Install dependencies
+      run: shards install
+    - name: Run tests
+      run: crystal spec

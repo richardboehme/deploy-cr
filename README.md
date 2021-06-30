@@ -8,7 +8,7 @@
 - [ ] Document everything
 - [ ] Input validation at compile time
 - [ ] Implement some kind of more sophisticated logger (better than puts I guess)
-- [ ] Add CI
+- [x] Add CI
 
 ## Installation
 

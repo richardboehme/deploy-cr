@@ -9,13 +9,13 @@ crystal: 0.36.1
 license: MIT
 
 targets:
-  deploy: 
+  deploy:
     main: src/deploy-cr/cli.cr
 
 scripts:
   # FIXME: Is this even the proper way to build the binary?
   # We need to use --production here to avoid installing the development dependencies
-  postinstall: shards build --production deploy 
+  postinstall: shards build --production deploy
 
 executables:
   - deploy
@@ -28,7 +28,3 @@ dependencies:
     github: mosop/teeplate
   clip:
     github: erdnaxeli/clip
-
-development_dependencies:
-  deploy-cr:
-    path: .
