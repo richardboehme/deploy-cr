@@ -53,7 +53,7 @@ describe DeployCR::CLI::InitCommand do
       File.file?(path).should be_true
       content = File.read(path)
 
-      content.should match(Regex.new("^require \"deploy-cr\/deployment\"$", Regex::Options::MULTILINE))
+      content.should match(/^require \"deploy-cr\"$/m)
       content.should match(/^class Deployment::Task < DeployCR::Deployment$/m)
       content.should match(/^  include Task::CloneProject::Properties$/m)
       content.should match(/^  include Task::CrossCompile::Properties$/m)

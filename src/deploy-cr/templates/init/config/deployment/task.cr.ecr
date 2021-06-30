@@ -1,10 +1,10 @@
-require "deploy-cr/deployment"
+require "deploy-cr"
 
 class Deployment::Task < DeployCR::Deployment
   include Task::CloneProject::Properties
   <%- if cross_compile? -%>
   include Task::CrossCompile::Properties
-  <%- end %>
+  <%- end -%>
 
   step Task::CloneProject
   <%- if npm? -%>
@@ -19,5 +19,5 @@ class Deployment::Task < DeployCR::Deployment
   step sync_to_server!
   <%- if cross_compile? -%>
   step Task::CrossCompile::Link
-  <%- end %>
+  <%- end -%>
 end
