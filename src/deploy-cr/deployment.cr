@@ -1,3 +1,5 @@
+require "./operation"
+
 class DeployCR::Deployment < DeployCR::Operation
   property! path : String
   property app_name : String
