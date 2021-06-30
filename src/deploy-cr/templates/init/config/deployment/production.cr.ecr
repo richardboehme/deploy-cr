@@ -8,4 +8,9 @@ Deployment::Task.configure do |config|
   config.user = "deploy"
 
   config.source = "git-repo-path"
+  <%- if cross_compile? -%>
+
+  config.libcrystala_location = "location/for/libcrystal.a"
+  config.llvm_command = "llvm-config"
+  <%- end -%>
 end
