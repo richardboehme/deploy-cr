@@ -25,7 +25,7 @@ describe DeployCR::Deployment do
     cmd = DeployCR::Command.commands.first
     cmd.shell?.should be_true
     cmd.command_with_arguments.should eq(
-      "rsync -avmz -e ssh --include=\"*/\" --include=\"file1\" --include=\"file2\" --exclude=\"*\" . user@host:/srv/app"
+      "rsync -avmz --include=\"*/\" --include=\"file1\" --include=\"file2\" --exclude=\"*\" . user@host:/srv/app"
     )
   end
 end
