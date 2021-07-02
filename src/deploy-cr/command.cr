@@ -18,10 +18,17 @@ class DeployCR::Command
   end
 
   def run
+    arguments = self.args
+    command = self.cmd
+    if self.shell? && self.args
+      arguments = nil
+      command += " #{self.args.join(" ")}"
+    end
+
     self.status =
       Process.run(
-        @cmd,
-        @args,
+        command,
+        arguments,
         output: @output,
         error: DeployCR.stderr,
         chdir: @chdir.to_s,
