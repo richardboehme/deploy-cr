@@ -10,12 +10,16 @@ module DeployCR::Task::CrossCompile
 
     def link_binary!
       # processing of the link command
-      self.link_command = link_command.gsub(app_path.join(tmppath).to_s, path)
-      if libcrystala_location
-        # FIXME: can we instead pass a custom compile flag that defines this?
-        self.link_command = link_command.gsub(/[^ ]*libcrystal.a[^ ]*/, libcrystala_location)
+      if command = self.link_command
+        command = command.gsub(app_path.join(tmppath).to_s, path)
+        if libcrystala_location
+          # FIXME: can we instead pass a custom compile flag that defines this?
+          command = command.gsub(/[^ ]*libcrystal.a[^ ]*/, libcrystala_location)
+        end
+        ssh(command)
+      else
+        false
       end
-      ssh(link_command)
     end
   end
 end

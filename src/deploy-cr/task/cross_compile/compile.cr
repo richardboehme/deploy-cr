@@ -7,7 +7,7 @@ module DeployCR::Task::CrossCompile
     property app_name : String
     property files : Array(String)
 
-    def initialize(@user, @host, @app_name, @files, @llvm_command); end
+    def initialize(@user, @host, @app_name, @files, @llvm_command, @link_command = nil); end
 
     step retrieve_llvm_target!
     step compile_app!
