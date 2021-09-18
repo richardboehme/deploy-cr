@@ -13,8 +13,7 @@ targets:
     main: src/deploy-cr/cli.cr
 
 scripts:
-  # We need to use --production here to avoid installing the development dependencies
-  postinstall: shards build --production deploy
+  postinstall: shards build --release deploy
 
 executables:
   - deploy
