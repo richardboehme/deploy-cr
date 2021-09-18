@@ -157,13 +157,13 @@ Note that you still need to enable asset compilation if you want your assets to 
 A deployment can be started by running:
 
 ```
-bin/deploy-cr run <stage>
+bin/deploy run <stage>
 ```
 
 The `stage` argument specifies the configuration file that should be used. For example if you want to deploy using the `production.cr` configuration file you can run:
 
 ```
-bin/deploy-cr run production
+bin/deploy run production
 ```
 
 This CLI command is just a convenience wrapper around executing the stage file directly. The above command is roughly equal to
