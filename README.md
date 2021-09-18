@@ -1,5 +1,8 @@
 # deploy-cr
 
+[![GitHub release](https://img.shields.io/github/release/richardboehme/deploy-cr.svg)](https://github.com/richardboehme/deploy-cr/releases)
+![CI](https://github.com/richardboehme/deploy-cr/actions/workflows/specs.yml/badge.svg)
+
 Simple and powerful deployment for your crystal application.
 
 **Note**: This project is at a very early stage of development. Please do not hesitate to open an issue if you experience any problems.
