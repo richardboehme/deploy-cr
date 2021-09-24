@@ -44,6 +44,11 @@ describe DeployCR::CLI::InitCommand do
 
       content.should match(Regex.new("^require \"\.\/task\"$", Regex::Options::MULTILINE))
       content.should match(/^Deployment::Task\.configure do \|config\|$/m)
+      {% if compare_versions(Crystal::VERSION, "1.1.0-0") < 0 %}
+      content.should match(Regex.new("^  config.libcrystala_location = \"location\/for\/libcrystal\.a\"$", Regex::Options::MULTILINE))
+      {% else %}
+      content.should_not match(Regex.new("^  config.libcrystala_location = \"location\/for\/libcrystal\.a\"$", Regex::Options::MULTILINE))
+      {% end %}
       content.should match(/^end$/m)
     end
 

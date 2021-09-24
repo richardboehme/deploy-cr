@@ -87,7 +87,6 @@ Deployment::Task.configure do |config|
 
   config.source = "git-repo-path"
 
-  config.libcrystala_location = "location/for/libcrystal.a"
   config.llvm_command = "llvm-config"
 end
 ```
@@ -132,9 +131,9 @@ The following configuration options are available:
 
 After the object file was uploaded linking happens by the `Task::CrossCompile::Link` step.
 
-The following configuration options are available:
+You only have to configure the following option when running on a Crystal version < 1.1.0. From Crystal 1.1.0 the file is not needed to link the object file on the target machine.
 
-**libcrystal_location**: libcrystal is needed to link your binary. This means the file `libcrystal.a` has to be present at the target machine. Set the location of this file here so that we can replace it when linking. You can get the `libcrystal.a` file by checking out the [Crystal](https://github.com/crystal-lang/crystal) repository on the target machine and run `make libcrystal`.
+**libcrystala_location**: libcrystal is needed to link your binary on projects that use Crystal < 1.1.0. This means the file `libcrystal.a` has to be present at the target machine. Set the location of this file here so that we can replace it when linking. You can get the `libcrystal.a` file by checking out the [Crystal](https://github.com/crystal-lang/crystal) repository on the target machine and run `make libcrystal`.
 
 #### Asset Compilation
 

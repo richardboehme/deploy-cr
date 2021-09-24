@@ -13,7 +13,11 @@ end
 describe DeployCR::Task::CrossCompile::Link do
   it "produce correct commands" do
     CommandStub.stub_command("llvm-command", ["target"])
+    {% if compare_versions(Crystal::VERSION, "1.1.0-0") < 0 %}
     CommandStub.stub_command("shards", ["cc #{Path.new(".").expand.join("tmp/deploy")} bar/foo/libcrystal.a foo"])
+    {% else %}
+    CommandStub.stub_command("shards", ["cc #{Path.new(".").expand.join("tmp/deploy")} foo"])
+    {% end %}
 
     operation =
       Task.configure do |config|
@@ -21,7 +25,9 @@ describe DeployCR::Task::CrossCompile::Link do
         config.host = "host"
 
         config.llvm_command = "llvm-command"
+        {% if compare_versions(Crystal::VERSION, "1.1.0-0") < 0 %}
         config.libcrystala_location = "~/crystal/src/ext/libcrystal.a"
+        {% end %}
         config.path = "/srv/app"
       end
 
@@ -32,6 +38,10 @@ describe DeployCR::Task::CrossCompile::Link do
 
     cmd = DeployCR::Command.commands.last
     cmd.ssh?.should be_true
+    {% if compare_versions(Crystal::VERSION, "1.1.0-0") < 0 %}
     cmd.command_with_arguments.should eq("cc /srv/app ~/crystal/src/ext/libcrystal.a foo")
+    {% else %}
+    cmd.command_with_arguments.should eq("cc /srv/app foo")
+    {% end %}
   end
 end

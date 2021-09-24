@@ -10,7 +10,9 @@ Deployment::Task.configure do |config|
   config.source = "git-repo-path"
   <%- if cross_compile? -%>
 
+  <%- {% if compare_versions(Crystal::VERSION, "1.1.0-0") < 0 %} -%>
   config.libcrystala_location = "location/for/libcrystal.a"
+  <%- {% end %} -%>
   config.llvm_command = "llvm-config"
   <%- end -%>
 end
