@@ -3,7 +3,7 @@ require "../../../src/deploy-cr/deployment"
 require "../../../src/deploy-cr/task/cross_compile/compile"
 require "../../../src/deploy-cr/task/cross_compile/link"
 
-private class Task < DeployCR::Deployment
+private class TestTask < DeployCR::Deployment
   include Task::CrossCompile::Properties
 
   step Task::CrossCompile::Compile
@@ -20,7 +20,7 @@ describe DeployCR::Task::CrossCompile::Link do
     {% end %}
 
     operation =
-      Task.configure do |config|
+      TestTask.configure do |config|
         config.user = "user"
         config.host = "host"
 

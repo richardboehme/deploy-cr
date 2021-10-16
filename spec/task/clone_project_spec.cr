@@ -2,7 +2,7 @@ require "../spec_helper"
 require "../../src/deploy-cr/deployment"
 require "../../src/deploy-cr/task/clone_project"
 
-private class Task < DeployCR::Deployment
+private class TestTask < DeployCR::Deployment
   include Task::CloneProject::Properties
 
   step Task::CloneProject
@@ -11,7 +11,7 @@ end
 describe DeployCR::Task::CloneProject do
   it "produce correct output" do
     operation =
-      Task.configure do |config|
+      TestTask.configure do |config|
         config.source = "git-repo"
       end
 
