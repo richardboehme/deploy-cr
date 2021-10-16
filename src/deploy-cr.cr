@@ -1,8 +1,7 @@
 require "./deploy-cr/**"
 
-# TODO: Write documentation for `Deploy::Cr`
 module DeployCR
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
   BINNAME = "deploy"
 
   def app_path
