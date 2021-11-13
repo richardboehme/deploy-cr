@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Release 0.2.0
 
 * Remove the need for libcrystal.a when using Crystal 1.1.0 or newer.
 

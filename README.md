@@ -23,7 +23,7 @@ Simple and powerful deployment for your crystal application.
    development-dependencies:
      deploy-cr:
        github: richardboehme/deploy-cr
-       version: ~> 0.1.1
+       version: ~> 0.2.0
    ```
 
 2. Run `shards install`. This will build the deploy-cr CLI binary at `bin/deploy`.
