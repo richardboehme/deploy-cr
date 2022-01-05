@@ -200,6 +200,6 @@ Bug reports and pull requests are highly welcomed and appreciated. This project 
 
 ## License
 
-Copyright (c) 2021 Richard Böhme (richard.boehme1999@gmail.com)
+Copyright (c) 2021-2022 Richard Böhme (richard.boehme1999@gmail.com)
 
 deploy-cr is released under the [MIT License](https://opensource.org/licenses/MIT).
