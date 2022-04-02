@@ -42,8 +42,8 @@ describe DeployCR::CLI::InitCommand do
       File.file?(path).should be_true
       content = File.read(path)
 
-      content.should match(Regex.new("^require \"\.\/task\"$", Regex::Options::MULTILINE))
-      content.should match(/^Deployment::Task\.configure do \|config\|$/m)
+      content.should match(Regex.new("^require \"\.\/deployment\"$", Regex::Options::MULTILINE))
+      content.should match(/^Deployment\.configure do \|config\|$/m)
       {% if compare_versions(Crystal::VERSION, "1.1.0-0") < 0 %}
       content.should match(Regex.new("^  config.libcrystala_location = \"location\/for\/libcrystal\.a\"$", Regex::Options::MULTILINE))
       {% else %}
@@ -54,12 +54,12 @@ describe DeployCR::CLI::InitCommand do
 
     it "generate with cross compile option" do
       DeployCR::CLI::InitCommand.run(["init", "--cross-compile"])
-      path = File.join("tmp", "templates", "config", "deployment", "task.cr")
+      path = File.join("tmp", "templates", "config", "deployment", "deployment.cr")
       File.file?(path).should be_true
       content = File.read(path)
 
       content.should match(/^require \"deploy-cr\"$/m)
-      content.should match(/^class Deployment::Task < DeployCR::Deployment$/m)
+      content.should match(/^class Deployment < DeployCR::Deployment$/m)
       content.should match(/^  include Task::CloneProject::Properties$/m)
       content.should match(/^  include Task::CrossCompile::Properties$/m)
       content.should match(/^end$/m)
@@ -74,7 +74,7 @@ describe DeployCR::CLI::InitCommand do
 
     it "generate with npm option" do
       DeployCR::CLI::InitCommand.run(["init", "--npm", "--cross-compile"])
-      path = File.join("tmp", "templates", "config", "deployment", "task.cr")
+      path = File.join("tmp", "templates", "config", "deployment", "deployment.cr")
       File.file?(path).should be_true
       content = File.read(path)
 
@@ -89,7 +89,7 @@ describe DeployCR::CLI::InitCommand do
 
     it "generate with amber option" do
       DeployCR::CLI::InitCommand.run(["init", "--amber", "--cross-compile"])
-      path = File.join("tmp", "templates", "config", "deployment", "task.cr")
+      path = File.join("tmp", "templates", "config", "deployment", "deployment.cr")
       File.file?(path).should be_true
       content = File.read(path)
 

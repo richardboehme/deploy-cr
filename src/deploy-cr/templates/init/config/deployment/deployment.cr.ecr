@@ -1,6 +1,6 @@
 require "deploy-cr"
 
-class Deployment::Task < DeployCR::Deployment
+class Deployment < DeployCR::Deployment
   include Task::CloneProject::Properties
   <%- if cross_compile? -%>
   include Task::CrossCompile::Properties

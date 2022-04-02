@@ -46,20 +46,20 @@ After running the command you should go ahead and configure the deployment proce
 
 ### Configuration
 
-After setting up there will be `config/deployment/task.cr` and a `config/deployment/production.cr` file.
+After setting up there will be `config/deployment/deployment.cr` and a `config/deployment/production.cr` file.
 
-The `task.cr` file includes all steps that are necessary to deploy your application. You can easily customize this operation.
+The `deployment.cr` file includes all steps that are necessary to deploy your application. You can easily customize this operation.
 
 The `production.cr` file contains the configuration used for your production stage. You can also create other files with different configurations for different stages (for example a `staging.cr` file).
 
-#### task<area>.cr
+#### deployment<area>.cr
 
-The Task class is a Hathor Operation. This means, that the deployment process is structured into multiple steps that run in order of definition. If one step fails the execution is terminated. You can read more about Hathor Operations on their [repository](https://github.com/ikaru5/hathor-operation).
+The Deployment class is a Hathor Operation. This means, that the deployment process is structured into multiple steps that run in order of definition. If one step fails the execution is terminated. You can read more about Hathor Operations on their [repository](https://github.com/ikaru5/hathor-operation).
 
 This makes it really easy to add custom steps to your deployment task. For example one may need a step to restart the application after a successful deployment. You can simply add it like that:
 
 ```crystal
-class Deployment::Task < DeployCR::Deployment
+class Deployment < DeployCR::Deployment
   # ...
   step restart!
 
@@ -76,9 +76,9 @@ You can use the `run` method to run a command locally and the `ssh` method to ru
 By default configuration file for one stage (`production.cr`) will be created. It looks like this:
 
 ```crystal
-require "./task"
+require "./deployment"
 
-Deployment::Task.configure do |config|
+Deployment.configure do |config|
   config.app_name = "your-binary-name"
   config.path = "path/to/your/app"
 

@@ -1,6 +1,6 @@
-require "./task"
+require "./deployment"
 
-Deployment::Task.configure do |config|
+Deployment.configure do |config|
   config.app_name = "your-binary-name"
   config.path = "path/to/your/app"
 
