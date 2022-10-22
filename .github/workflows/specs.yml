@@ -2,9 +2,9 @@ name: Specs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -12,15 +12,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest ]
-        crystal: [ 0.36.1, 1.0.0, 1.1.1, 1.2.2, 1.3.0 ]
+        os: [ubuntu-latest]
+        crystal: [0.36.1, 1.0.0, 1.6.1]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: crystal-lang/install-crystal@v1
-      with:
-        crystal: ${{ matrix.crystal }}
-    - name: Install dependencies
-      run: shards install --ignore-crystal-version
-    - name: Run tests
-      run: crystal spec
+      - uses: actions/checkout@v2
+      - uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal }}
+      - name: Install dependencies
+        run: shards install --ignore-crystal-version
+      - name: Run tests
+        run: crystal spec
